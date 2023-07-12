@@ -1,0 +1,45 @@
+#proyect-participants {
+  width: 75%;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      border: 1px solid black;
+      padding: 5px;
+      text-transform: capitalize;
+    }
+  }
+
+  ul {
+    width: 100%;
+
+    li {
+      background-color: $background-color;
+
+      span {
+        &:first-of-type {
+          margin-right: 10px;
+        }
+
+        &:hover {
+          cursor: pointer;
+          transition: $transition-time;
+          background-color: #141414 !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #proyect-participants {
+    .header {
+      .btn {
+        font-size: 0.7rem;
+        padding: 1px !important;
+      }
+    }
+  }
+}

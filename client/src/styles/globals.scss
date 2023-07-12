@@ -1,0 +1,152 @@
+@import "variables";
+@import "./pages/home/index";
+@import "./pages/new-proyect/index";
+@import "./pages/proyect/index";
+@import "pages/settings/index";
+@import "pages/welcome/index";
+@import "pages/sign-in/index";
+
+* {
+  font-family: "Raleway", sans-serif, Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: $background-color;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#header {
+  background-color: $second-color;
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .full-logo {
+      width: 250px;
+      height: 70px;
+      cursor: pointer;
+    }
+    .icon-logo {
+      width: 50px;
+      height: 50px;
+      display: none;
+      cursor: pointer;
+    }
+
+    .settings {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      button {
+        margin-right: 10px;
+        border: 1px solid black;
+        span {
+          display: none;
+        }
+      }
+
+      .user-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+#list {
+  min-width: 30% !important;
+  min-height: 100vh !important;
+  background-color: $second-color;
+  color: #fff;
+  border-top: 1px solid rgb(194, 194, 194);
+
+  .responsive {
+    display: none;
+
+    h3 {
+      &:hover {
+        cursor: pointer;
+        color: $hover-color;
+        transition: $transition-time;
+      }
+    }
+  }
+
+  li {
+    background: none;
+    border-width: 0 0 1px;
+
+    &:last-of-type {
+      border: none;
+    }
+
+    .item {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+        color: $hover-color;
+        transition: $transition-time;
+      }
+    }
+  }
+}
+
+#footer {
+  background-color: $first-color;
+  color: #fff;
+
+  p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .list-container {
+    flex-direction: column;
+  }
+  #list {
+    min-height: auto !important;
+    .responsive {
+      display: block !important;
+    }
+    .default {
+      display: none !important;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #header {
+    .full-logo {
+      display: none;
+    }
+    .icon-logo {
+      display: block !important;
+    }
+
+    .settings {
+      button {
+        strong {
+          display: none;
+        }
+        span {
+          display: block !important;
+        }
+      }
+
+      .user-icon {
+        width: 35px !important;
+        height: 35px !important;
+      }
+    }
+  }
+}

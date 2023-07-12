@@ -1,0 +1,11 @@
+#new-proyect-form {
+  button {
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 768px) {
+  #new-proyect-form {
+    height: 100vh;
+  }
+}

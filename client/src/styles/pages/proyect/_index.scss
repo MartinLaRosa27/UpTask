@@ -1,0 +1,31 @@
+#proyect {
+  .information {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .buttons {
+      .btn {
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        padding: 4px;
+        border: 1px solid #1e1e1e;
+      }
+    }
+  }
+
+  .alert-danger {
+    max-height: 75px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50% !important;
+    margin: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+@import "tasks";
+@import "participants";
