@@ -1,32 +1,33 @@
 import React, { createContext, useContext } from "react";
 import { print } from "graphql";
 import { toast } from "react-hot-toast";
-import gql from "graphql-tag";
 import axios from "axios";
+import gql from "graphql-tag";
 const Context = createContext();
 
-export const CountryContext = ({ children }) => {
-  const [countriesList, setCountriesList] = React.useState(null);
+// interface CategoryContextProps {
+//   children: any;
+// }
 
+export const CategoryContext = ({ children }) => {
   // ---------------------------------------------------------------------------
-  const getAllCountries = async () => {
-    const GET_ALL_COUNTRIES = gql`
-      query GetAllCountries {
-        getAllCountries {
+  const getAllCategories = async () => {
+    let categoriesAux = [];
+    const GET_ALL_CATEGORIES = gql`
+      query GetAllCategories {
+        getAllCategories {
+          name
           _id
-          country_code
-          country_name
-          phone_code
         }
       }
     `;
     await axios
       .post(`http://${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
-        query: print(GET_ALL_COUNTRIES),
+        query: print(GET_ALL_CATEGORIES),
       })
       .then((res) => {
         if (!res.data.errors) {
-          setCountriesList(res.data.data.getAllCountries);
+          categoriesAux = res.data.data.getAllCategories;
         } else {
           toast.error(res.data.errors[0].message, {
             style: {
@@ -41,16 +42,15 @@ export const CountryContext = ({ children }) => {
       .catch((e) => {
         console.log(e);
       });
+    return categoriesAux;
   };
 
   // ---------------------------------------------------------------------------
   return (
-    <Context.Provider value={{ countriesList, getAllCountries }}>
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ getAllCategories }}>{children}</Context.Provider>
   );
 };
 
-export const useCountryContext = () => {
+export const useCategoryContext = () => {
   return useContext(Context);
 };

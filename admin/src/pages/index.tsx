@@ -1,11 +1,14 @@
 import React from "react";
 import * as cookie from "cookie";
+import HeaderHome from "@/components/Home/HeaderHome";
+import Categories from "@/components/Home/Categories";
 
 // ----------------------------------------------------------------------------------------
 export default function Home() {
   return (
     <>
-      <h1>Hola mundo</h1>
+      <HeaderHome />
+      <Categories />
     </>
   );
 }
@@ -18,6 +21,9 @@ export const getServerSideProps = async (context: any) => {
   } else {
     const parsedCookies = cookie.parse(context.req.headers.cookie);
     tokenAdmin = parsedCookies.tokenAdmin;
+  }
+  if (!tokenAdmin) {
+    tokenAdmin = null;
   }
   if (
     !tokenAdmin ||

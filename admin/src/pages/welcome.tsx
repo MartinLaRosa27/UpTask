@@ -110,6 +110,9 @@ export const getServerSideProps = async (context: any) => {
     const parsedCookies = cookie.parse(context.req.headers.cookie);
     tokenAdmin = parsedCookies.tokenAdmin;
   }
+  if (!tokenAdmin) {
+    tokenAdmin = null;
+  }
   if (
     tokenAdmin &&
     tokenAdmin ==

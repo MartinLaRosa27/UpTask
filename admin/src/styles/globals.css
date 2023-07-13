@@ -1,9 +1,34 @@
-* {
-  font-family: "Raleway", sans-serif, Arial, Helvetica, sans-serif;
+#home-headerHome .main-title {
+  font-weight: bold;
+  color: #469bd8;
+}
+#home-headerHome .logout {
+  text-decoration: underline;
+}
+#home-headerHome .logout:hover {
+  cursor: pointer;
+  color: #ffc107;
+  transition: 0.4s;
 }
 
-body {
-  background-color: #95ddff;
+#home-categories {
+  margin-top: 40px;
+}
+#home-categories .list-categories h3 {
+  margin-bottom: 10px;
+}
+#home-categories .list-categories h3 strong {
+  color: #469bd8;
+}
+#home-categories .list-categories li {
+  align-items: center !important;
+}
+#home-categories .list-categories li span {
+  cursor: pointer;
+  font-size: 1rem;
+}
+#home-categories .list-categories li span:first-of-type {
+  margin-right: 20px;
 }
 
 #welcome-login {
@@ -105,4 +130,12 @@ body {
   cursor: pointer;
   color: #469bd8;
   transition: 0.4s;
+}
+
+* {
+  font-family: "Raleway", sans-serif, Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #95ddff;
 }/*# sourceMappingURL=globals.css.map */

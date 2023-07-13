@@ -26,7 +26,9 @@ export const getServerSideProps = async (context: any) => {
     const parsedCookies = cookie.parse(context.req.headers.cookie);
     token = parsedCookies.token;
   }
-
+  if (!token) {
+    token = null;
+  }
   if (await auth(token)) {
     return {
       redirect: {

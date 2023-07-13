@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import axios from "axios";
 import { print } from "graphql";
+import { toast } from "react-hot-toast";
 import gql from "graphql-tag";
 const Context = createContext();
 
