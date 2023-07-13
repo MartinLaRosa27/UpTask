@@ -7,6 +7,15 @@ module.exports.typeDefs = gql`
     country: String
   }
 
+  input categoryInput {
+    name: String!
+  }
+
+  type categoryType {
+    _id: String
+    name: String
+  }
+
   input projectInput {
     name: String!
     categoryId: String!
@@ -85,5 +94,6 @@ module.exports.typeDefs = gql`
     deleteTask(taskId: String): taskType
     deleteParticipant(userId: String, projectId: String): participantType
     leaveProject(projectId: String): participantType
+    postCategory(input: categoryInput): categoryType
   }
 `;

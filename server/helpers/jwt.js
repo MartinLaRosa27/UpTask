@@ -23,15 +23,3 @@ module.exports.decodeToken = (token) => {
   }
   return payload;
 };
-
-// --------------------------------------------------------------------------
-module.exports.createTokenAdmin = (user) => {
-  const payload = {
-    _id: user._id,
-    username: user.username,
-    password: user.password,
-    exp: moment().unix() + process.env.TOKEN_EXP_SEC,
-  };
-  const token = jwt.encode(payload, process.env.SECRET);
-  return token;
-};

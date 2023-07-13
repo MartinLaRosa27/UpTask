@@ -42,8 +42,63 @@ export const CategoryContext = ({ children }) => {
   };
 
   // ---------------------------------------------------------------------------
+  const postCategory = async (name, token) => {
+    const POST_CATEGORY = gql`
+      mutation Mutation($input: categoryInput) {
+        postCategory(input: $input) {
+          name
+          _id
+        }
+      }
+    `;
+    await axios
+      .post(
+        `http://${process.env.NEXT_PUBLIC_BACKEND_URL}`,
+        {
+          query: print(POST_CATEGORY),
+          variables: {
+            input: {
+              name,
+            },
+          },
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        if (!res.data.errors) {
+          toast.success("Category successfully registered", {
+            style: {
+              background: "#333",
+              color: "#fff",
+              fontWeight: "bold",
+              textAlign: "center",
+            },
+          });
+        } else {
+          toast.error(res.data.errors[0].message, {
+            style: {
+              background: "#333",
+              color: "#fff",
+              fontWeight: "bold",
+              textAlign: "center",
+            },
+          });
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  // ---------------------------------------------------------------------------
   return (
-    <Context.Provider value={{ getAllCategories }}>{children}</Context.Provider>
+    <Context.Provider value={{ getAllCategories, postCategory }}>
+      {children}
+    </Context.Provider>
   );
 };
 

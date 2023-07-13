@@ -4,7 +4,10 @@ const {
   patchUser,
   getUserByUsername,
 } = require("../controllers/userController");
-const { getAllCategories } = require("../controllers/categoryController");
+const {
+  getAllCategories,
+  postCategory,
+} = require("../controllers/categoryController");
 const { getAllCountries } = require("../controllers/countryController");
 const {
   postProject,
@@ -115,6 +118,11 @@ module.exports.resolvers = {
 
     leaveProject: (root, { projectId }, context) => {
       return leaveProject(projectId, context.user);
+    },
+
+    // Category:
+    postCategory: (root, { input }, context) => {
+      return postCategory(context.user, input);
     },
   },
 };

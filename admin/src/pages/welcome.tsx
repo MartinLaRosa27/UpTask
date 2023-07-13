@@ -127,7 +127,7 @@ export const getServerSideProps = async (context: any) => {
   } else {
     return {
       props: {
-        tokenAdmin: false,
+        tokenAdmin,
       },
     };
   }

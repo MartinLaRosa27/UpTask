@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { createToken } from "@/helpers/jws";
 import { useCategoryContext } from "@/context/CategoryContext";
+import { FormFloating } from "react-bootstrap";
 
 interface EditCategoryProps {
   setSelectedCategory: any;
   selectedCategory: any;
+  tokenAdmin: any;
+  setRecall: any;
 }
 
 export default function EditCategory({
   setSelectedCategory,
   selectedCategory,
+  tokenAdmin,
+  setRecall,
 }: EditCategoryProps) {
-  const { getAllCategories } = useCategoryContext();
+  const { postCategory } = useCategoryContext();
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +36,10 @@ export default function EditCategory({
         ),
     }),
     onSubmit: async (formData: any) => {
-      alert("ok");
+      if (!selectedCategory) {
+        await postCategory(formData.name, createToken(tokenAdmin));
+      }
+      setRecall(true);
       setSelectedCategory(null);
       formData.name = "";
     },
@@ -38,6 +47,15 @@ export default function EditCategory({
 
   return (
     <div id="home-categories" className="container">
+      {selectedCategory ? (
+        <h5>
+          Modify: <strong>{selectedCategory.name}</strong>
+        </h5>
+      ) : (
+        <h5>
+          Register a <strong>new</strong> category
+        </h5>
+      )}
       <Form onSubmit={formik.handleSubmit} method="POST">
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Control
@@ -46,9 +64,7 @@ export default function EditCategory({
             required
             name="name"
             onChange={formik.handleChange}
-            value={
-              selectedCategory ? selectedCategory.name : formik.values.name
-            }
+            value={formik.values.name}
           />
           {formik.errors.name && formik.values.name.length > 144 && (
             // @ts-ignore

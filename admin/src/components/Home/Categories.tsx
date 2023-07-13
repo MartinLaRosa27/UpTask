@@ -9,11 +9,15 @@ import { useCategoryContext } from "@/context/CategoryContext";
 interface CategoriesProps {
   setSelectedCategory: any;
   selectedCategory: any[];
+  recall: boolean;
+  setRecall: any;
 }
 
 export default function Categories({
   setSelectedCategory,
   selectedCategory,
+  recall,
+  setRecall,
 }: CategoriesProps) {
   const { getAllCategories } = useCategoryContext();
   const [allCategories, setAllCategories] = useState<any[] | null>(null);
@@ -23,7 +27,8 @@ export default function Categories({
       setAllCategories(await getAllCategories());
     };
     callGetAllCategories();
-  }, [selectedCategory]);
+    setRecall(false);
+  }, [selectedCategory, recall]);
 
   const handleClick = (category: any) => {
     if (

@@ -4,9 +4,14 @@ import HeaderHome from "@/components/Home/HeaderHome";
 import Categories from "@/components/Home/Categories";
 import EditCategory from "@/components/Home/EditCategory";
 
+interface HomeProps {
+  tokenAdmin: any;
+}
+
 // ----------------------------------------------------------------------------------------
-export default function Home() {
+export default function Home({ tokenAdmin }: HomeProps) {
   const [selectedCategory, setSelectedCategory] = useState<any>(null);
+  const [recall, setRecall] = useState<boolean>(false);
 
   return (
     <>
@@ -14,10 +19,14 @@ export default function Home() {
       <Categories
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
+        recall={recall}
+        setRecall={setRecall}
       />
       <EditCategory
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
+        tokenAdmin={tokenAdmin}
+        setRecall={setRecall}
       />
     </>
   );
