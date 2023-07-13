@@ -1,7 +1,7 @@
 import React from "react";
-import auth from "@/middleware/auth";
 import * as cookie from "cookie";
 
+// ----------------------------------------------------------------------------------------
 export default function Home() {
   return (
     <>
@@ -10,17 +10,20 @@ export default function Home() {
   );
 }
 
+// ----------------------------------------------------------------------------------------
 export const getServerSideProps = async (context: any) => {
-  let token;
+  let tokenAdmin;
   if (typeof context.req.headers.cookie !== "string") {
-    token = null;
+    tokenAdmin = null;
   } else {
     const parsedCookies = cookie.parse(context.req.headers.cookie);
-    token = parsedCookies.token;
+    tokenAdmin = parsedCookies.tokenAdmin;
   }
-
-  const user = await auth(token);
-  if (!user) {
+  if (
+    !tokenAdmin ||
+    tokenAdmin !=
+      `${process.env.NEXT_PUBLIC_USER} ${process.env.NEXT_PUBLIC_PASS}`
+  ) {
     return {
       redirect: {
         destination: "/welcome",
@@ -30,8 +33,7 @@ export const getServerSideProps = async (context: any) => {
   } else {
     return {
       props: {
-        token,
-        user,
+        tokenAdmin,
       },
     };
   }
