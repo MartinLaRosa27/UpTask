@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import * as cookie from "cookie";
 import HeaderHome from "@/components/Home/HeaderHome";
 import Categories from "@/components/Home/Categories";
+import EditCategory from "@/components/Home/EditCategory";
 
 // ----------------------------------------------------------------------------------------
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState<any>(null);
+
   return (
     <>
       <HeaderHome />
-      <Categories />
+      <Categories
+        setSelectedCategory={setSelectedCategory}
+        selectedCategory={selectedCategory}
+      />
+      <EditCategory
+        setSelectedCategory={setSelectedCategory}
+        selectedCategory={selectedCategory}
+      />
     </>
   );
 }

@@ -5,10 +5,6 @@ import axios from "axios";
 import gql from "graphql-tag";
 const Context = createContext();
 
-// interface CategoryContextProps {
-//   children: any;
-// }
-
 export const CategoryContext = ({ children }) => {
   // ---------------------------------------------------------------------------
   const getAllCategories = async () => {
