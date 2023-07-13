@@ -14,7 +14,7 @@ export default function Home({ tokenAdmin }: HomeProps) {
   const [recall, setRecall] = useState<boolean>(false);
 
   return (
-    <>
+    <div className="pb-5">
       <HeaderHome />
       <Categories
         setSelectedCategory={setSelectedCategory}
@@ -28,7 +28,7 @@ export default function Home({ tokenAdmin }: HomeProps) {
         tokenAdmin={tokenAdmin}
         setRecall={setRecall}
       />
-    </>
+    </div>
   );
 }
 

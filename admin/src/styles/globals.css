@@ -14,6 +14,14 @@
 #home-categories {
   margin-top: 40px;
 }
+#home-categories h5 strong {
+  color: #469bd8 !important;
+}
+#home-categories h5 .remove-category-logo {
+  color: #bc0000;
+  cursor: pointer;
+  margin-right: 10px;
+}
 #home-categories .list-categories h3 {
   margin-bottom: 10px;
 }

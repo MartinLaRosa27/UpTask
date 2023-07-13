@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { createToken } from "@/helpers/jws";
 import { useCategoryContext } from "@/context/CategoryContext";
-import { FormFloating } from "react-bootstrap";
+import { CiSquareRemove } from "react-icons/ci";
 
 interface EditCategoryProps {
   setSelectedCategory: any;
@@ -49,7 +49,13 @@ export default function EditCategory({
     <div id="home-categories" className="container">
       {selectedCategory ? (
         <h5>
-          Modify: <strong>{selectedCategory.name}</strong>
+          <span
+            className="remove-category-logo"
+            onClick={() => setSelectedCategory(null)}
+          >
+            <CiSquareRemove fontSize={"large"} />
+          </span>
+          Modify: <strong>{selectedCategory.name}</strong>{" "}
         </h5>
       ) : (
         <h5>
