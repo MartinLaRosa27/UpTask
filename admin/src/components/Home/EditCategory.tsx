@@ -20,7 +20,7 @@ export default function EditCategory({
   tokenAdmin,
   setRecall,
 }: EditCategoryProps) {
-  const { postCategory } = useCategoryContext();
+  const { postCategory, patchCategory } = useCategoryContext();
 
   const formik = useFormik({
     initialValues: {
@@ -38,6 +38,12 @@ export default function EditCategory({
     onSubmit: async (formData: any) => {
       if (!selectedCategory) {
         await postCategory(formData.name, createToken(tokenAdmin));
+      } else {
+        await patchCategory(
+          selectedCategory._id,
+          formData.name,
+          createToken(tokenAdmin)
+        );
       }
       setRecall(true);
       setSelectedCategory(null);

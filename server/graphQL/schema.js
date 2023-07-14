@@ -95,6 +95,7 @@ module.exports.typeDefs = gql`
     deleteParticipant(userId: String, projectId: String): participantType
     leaveProject(projectId: String): participantType
     postCategory(input: categoryInput): categoryType
+    patchCategory(id: String, input: categoryInput): categoryType
     deleteCategory(id: String): categoryType
   }
 `;

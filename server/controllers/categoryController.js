@@ -1,5 +1,6 @@
 const Category = require("../models/Category");
 const shortid = require("shortid");
+const { QueryTypes } = require("sequelize");
 
 // ---------------------------------------------------------------------------
 module.exports.getAllCategories = async () => {
@@ -40,10 +41,32 @@ module.exports.deleteCategory = async (id, user) => {
           _id: id,
         },
       });
-      return project;
+      return category;
     } catch (e) {
       console.log(e);
       throw new Error("Failed to delete the project");
+    }
+  } else {
+    throw new Error("session expired");
+  }
+};
+
+// ---------------------------------------------------------------------------
+module.exports.patchCategory = async (id, input, user) => {
+  const { name } = input;
+  if (user.admin) {
+    try {
+      const category = await Category.sequelize.query(
+        `UPDATE categories SET name='${name}'
+        WHERE _id='${id}';`,
+        {
+          type: QueryTypes.UPDATE,
+        }
+      );
+      return category;
+    } catch (e) {
+      console.log(e);
+      throw new Error("category could not be modified");
     }
   } else {
     throw new Error("session expired");

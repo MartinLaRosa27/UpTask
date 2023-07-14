@@ -95,7 +95,61 @@ export const CategoryContext = ({ children }) => {
   };
 
   // ---------------------------------------------------------------------------
-  const deleteProject = async (id, token) => {
+  const patchCategory = async (patchCategoryId, name, token) => {
+    const PATCH_CATEGORY = gql`
+      mutation PatchCategory($patchCategoryId: String, $input: categoryInput) {
+        patchCategory(id: $patchCategoryId, input: $input) {
+          _id
+          name
+        }
+      }
+    `;
+    await axios
+      .post(
+        `http://${process.env.NEXT_PUBLIC_BACKEND_URL}`,
+        {
+          query: print(PATCH_CATEGORY),
+          variables: {
+            patchCategoryId,
+            input: {
+              name,
+            },
+          },
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        if (!res.data.errors) {
+          toast.success("Category successfully updated", {
+            style: {
+              background: "#333",
+              color: "#fff",
+              fontWeight: "bold",
+              textAlign: "center",
+            },
+          });
+        } else {
+          toast.error(res.data.errors[0].message, {
+            style: {
+              background: "#333",
+              color: "#fff",
+              fontWeight: "bold",
+              textAlign: "center",
+            },
+          });
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  // ---------------------------------------------------------------------------
+  const deleteProject = async (deleteCategoryId, token) => {
     const DELETE_CATEGORY = gql`
       mutation DeleteCategory($deleteCategoryId: String) {
         deleteCategory(id: $deleteCategoryId) {
@@ -110,7 +164,7 @@ export const CategoryContext = ({ children }) => {
         {
           query: print(DELETE_CATEGORY),
           variables: {
-            deleteCategoryId: id,
+            deleteCategoryId,
           },
         },
         {
@@ -147,7 +201,9 @@ export const CategoryContext = ({ children }) => {
 
   // ---------------------------------------------------------------------------
   return (
-    <Context.Provider value={{ getAllCategories, postCategory, deleteProject }}>
+    <Context.Provider
+      value={{ getAllCategories, postCategory, deleteProject, patchCategory }}
+    >
       {children}
     </Context.Provider>
   );

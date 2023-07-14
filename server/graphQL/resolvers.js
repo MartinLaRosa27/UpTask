@@ -8,6 +8,7 @@ const {
   getAllCategories,
   postCategory,
   deleteCategory,
+  patchCategory,
 } = require("../controllers/categoryController");
 const { getAllCountries } = require("../controllers/countryController");
 const {
@@ -128,6 +129,10 @@ module.exports.resolvers = {
 
     deleteCategory: (root, { id }, context) => {
       return deleteCategory(id, context.user);
+    },
+
+    patchCategory: (root, { id, input }, context) => {
+      return patchCategory(id, input, context.user);
     },
   },
 };
