@@ -1,5 +1,8 @@
 const Category = require("../models/Category");
+const Project = require("../models/Project");
+const Task = require("../models/Task");
 const shortid = require("shortid");
+const Participant = require("../models/Participant");
 const { QueryTypes } = require("sequelize");
 
 // ---------------------------------------------------------------------------
@@ -36,6 +39,26 @@ module.exports.postCategory = async (user, input) => {
 module.exports.deleteCategory = async (id, user) => {
   if (user.admin) {
     try {
+      const proyect = await Project.findOne({
+        where: {
+          categoryId: id,
+        },
+      });
+      await Task.destroy({
+        where: {
+          projectId: proyect._id,
+        },
+      });
+      await Participant.destroy({
+        where: {
+          projectId: proyect._id,
+        },
+      });
+      await Project.destroy({
+        where: {
+          categoryId: id,
+        },
+      });
       const category = await Category.destroy({
         where: {
           _id: id,
