@@ -4,6 +4,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { createToken } from "@/helpers/jws";
 import { useCategoryContext } from "@/context/CategoryContext";
 
 interface CategoriesProps {
@@ -11,6 +12,7 @@ interface CategoriesProps {
   selectedCategory: any[];
   recall: boolean;
   setRecall: any;
+  tokenAdmin: string;
 }
 
 export default function Categories({
@@ -18,24 +20,28 @@ export default function Categories({
   selectedCategory,
   recall,
   setRecall,
+  tokenAdmin,
 }: CategoriesProps) {
-  const { getAllCategories } = useCategoryContext();
+  const { getAllCategories, deleteProject } = useCategoryContext();
   const [allCategories, setAllCategories] = useState<any[] | null>(null);
 
   useEffect(() => {
-    const callGetAllCategories = async () => {
-      setAllCategories(await getAllCategories());
-    };
     callGetAllCategories();
     setRecall(false);
   }, [selectedCategory, recall]);
 
-  const handleClick = (category: any) => {
+  const callGetAllCategories = async () => {
+    setAllCategories(await getAllCategories());
+  };
+
+  const handleClick = async (category: any) => {
     if (
       window.confirm(
         `Are you sure you want to delete the category "${category.name}"?`
       )
     ) {
+      await deleteProject(category._id, createToken(tokenAdmin));
+      await callGetAllCategories();
     }
   };
 

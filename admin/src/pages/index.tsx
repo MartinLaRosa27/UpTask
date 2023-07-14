@@ -21,6 +21,7 @@ export default function Home({ tokenAdmin }: HomeProps) {
         selectedCategory={selectedCategory}
         recall={recall}
         setRecall={setRecall}
+        tokenAdmin={tokenAdmin}
       />
       <EditCategory
         setSelectedCategory={setSelectedCategory}
