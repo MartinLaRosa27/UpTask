@@ -5,6 +5,7 @@ import * as cookie from "cookie";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
+import { createToken } from "@/helpers/jws";
 
 // ----------------------------------------------------------------------------------------
 export default function Welcome() {
@@ -25,10 +26,15 @@ export default function Welcome() {
         formData.password == process.env.NEXT_PUBLIC_PASS
       ) {
         const cookies = new Cookies();
-        cookies.set("tokenAdmin", `${formData.username} ${formData.password}`, {
-          path: "/",
-          maxAge: Number(process.env.NEXT_PUBLIC_COOKIE_EXP_SEC),
-        });
+
+        cookies.set(
+          "tokenAdmin",
+          createToken(`${formData.username} ${formData.password}`),
+          {
+            path: "/",
+            maxAge: Number(process.env.NEXT_PUBLIC_COOKIE_EXP_SEC),
+          }
+        );
         router.push("/");
       } else {
         toast.error("Datos incorrectos", {

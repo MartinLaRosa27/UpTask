@@ -44,16 +44,18 @@ module.exports.deleteCategory = async (id, user) => {
           categoryId: id,
         },
       });
-      await Task.destroy({
-        where: {
-          projectId: proyect._id,
-        },
-      });
-      await Participant.destroy({
-        where: {
-          projectId: proyect._id,
-        },
-      });
+      if (proyect?.id) {
+        await Task.destroy({
+          where: {
+            projectId: proyect._id,
+          },
+        });
+        await Participant.destroy({
+          where: {
+            projectId: proyect._id,
+          },
+        });
+      }
       await Project.destroy({
         where: {
           categoryId: id,

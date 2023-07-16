@@ -4,7 +4,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { createToken } from "@/helpers/jws";
 import { useCategoryContext } from "@/context/CategoryContext";
 
 interface CategoriesProps {
@@ -40,7 +39,8 @@ export default function Categories({
         `Are you sure you want to delete the category "${category.name}"?`
       )
     ) {
-      await deleteProject(category._id, createToken(tokenAdmin));
+      console.log(tokenAdmin);
+      await deleteProject(category._id, tokenAdmin);
       await callGetAllCategories();
     }
   };

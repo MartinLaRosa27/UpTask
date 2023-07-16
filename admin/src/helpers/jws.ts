@@ -19,3 +19,14 @@ export const createToken = (admin: any) => {
     return null;
   }
 };
+
+// --------------------------------------------------------------------------
+export const decodeToken = (token: any) => {
+  let payload = null;
+  const tokenAux = token.replace(/['"]+/g, "");
+  payload = jwt.decode(tokenAux, process.env.NEXT_PUBLIC_SECRET);
+  if (payload.exp <= moment().unix()) {
+    payload = null;
+  }
+  return payload;
+};

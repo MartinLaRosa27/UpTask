@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { createToken } from "@/helpers/jws";
 import { useCategoryContext } from "@/context/CategoryContext";
 import { CiSquareRemove } from "react-icons/ci";
 
@@ -37,12 +36,12 @@ export default function EditCategory({
     }),
     onSubmit: async (formData: any) => {
       if (!selectedCategory) {
-        await postCategory(formData.name, createToken(tokenAdmin));
+        await postCategory(formData.name, tokenAdmin);
       } else {
         await patchCategory(
           selectedCategory._id,
           formData.name,
-          createToken(tokenAdmin)
+      tokenAdmin
         );
       }
       setRecall(true);
