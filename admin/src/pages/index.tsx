@@ -42,13 +42,13 @@ export const getServerSideProps = async (context: any) => {
     tokenAdmin = null;
   } else {
     const parsedCookies = cookie.parse(context.req.headers.cookie);
-    decodeTokenAdmin = decodeToken(parsedCookies.tokenAdmin);
     tokenAdmin = parsedCookies.tokenAdmin;
   }
   if (!tokenAdmin) {
     tokenAdmin = null;
+  } else {
+    decodeTokenAdmin = decodeToken(tokenAdmin);
   }
-
   if (!decodeTokenAdmin || !decodeTokenAdmin.admin) {
     return {
       redirect: {

@@ -33,10 +33,10 @@ module.exports.userAuthentication = async (input) => {
       },
     });
     if (!userExists) {
-      throw new Error("The user is not registered");
+      throw new Error("Incorrect login information");
     }
     if (!bcrypt.compareSync(password, userExists.password)) {
-      throw new Error("Incorrect password");
+      throw new Error("Incorrect login information");
     }
     const token = createToken(userExists);
     return token;
