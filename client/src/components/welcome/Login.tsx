@@ -93,16 +93,6 @@ export const Login = () => {
               </div>
               <div className="forgot pb-5">
                 <div>
-                  <p className="f-text">
-                    <a
-                      href={process.env.NEXT_PUBLIC_ADMIN_PAGE}
-                      style={{ color: "gray" }}
-                    >
-                      Panel de administrador
-                    </a>
-                  </p>
-                </div>
-                <div>
                   <Link href={"/sign-in"} className="sign-text fw-bold">
                     Sign Up Now
                   </Link>

@@ -34,23 +34,6 @@ export const Main = (props: { user: any; token: string }) => {
       <div className="wrapper bg-white mt-5 mb-5 container">
         <h4 className="pb-4 pt-4 border-bottom fw-bold">Account settings</h4>
 
-        <div className="d-flex align-items-start py-3 border-bottom">
-          <img
-            src={
-              props.user.img ? props.user.img : process.env.NEXT_PUBLIC_USER_PIC
-            }
-            className="img"
-            alt="profile-img"
-          />
-          <div className="pl-sm-4 pl-2" id="img-section">
-            <b>Profile Photo</b>
-            <p>Other users will be able to see the image.</p>
-            <button className="btn button border">
-              <b>Upload</b>
-            </button>
-          </div>
-        </div>
-
         {countriesList ? (
           <form onSubmit={formik.handleSubmit} method="POST">
             <div className="py-2">

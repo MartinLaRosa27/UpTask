@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import logo from "../assets/logo.png";
 import icon from "../assets/icon.png";
+import userLogo from "../assets/user.webp";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useRouter } from "next/router";
@@ -55,15 +56,7 @@ export const Header = (props: { user: any; token: string }) => {
           </button>
           <NavDropdown
             title={
-              <img
-                src={
-                  props.user.img
-                    ? props.user.img
-                    : process.env.NEXT_PUBLIC_USER_PIC
-                }
-                alt="Profile img"
-                className="user-icon"
-              />
+              <Image src={userLogo} alt="Profile img" className="user-icon" />
             }
             id="basic-nav-dropdown"
           >
