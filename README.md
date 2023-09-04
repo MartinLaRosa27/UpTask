@@ -24,8 +24,3 @@ HTML / CSS / SASS / Bootstrap / JavaScript / TypeScript / ReactJS / NextJS / Nod
 ![alt text](https://github.com/MartinLaRosa27/UpTask2023/blob/main/resources/screenshot4.png?raw=true)
 ![alt text](https://github.com/MartinLaRosa27/UpTask2023/blob/main/resources/screenshot5.png?raw=true)
 ![alt text](https://github.com/MartinLaRosa27/UpTask2023/blob/main/resources/screenshot6.png?raw=true)
-
-<!--
-- Add administrator of the web site, who can add or remove categories.
-- Fix upload img with Cloudinary.
--->
